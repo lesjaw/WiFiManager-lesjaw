@@ -14,6 +14,17 @@
 MDNSResponder mdns;
 WiFiServer server(80);
 
+String macToStr(const uint8_t* mac)
+{
+  String result;
+  for (int i = 0; i < 6; ++i) {
+    result += String(mac[i], 16);
+    if (i < 5)
+      result += ':';
+  }
+  return result;
+}
+
 
 WiFiManager::WiFiManager(int eepromStart)
 {
@@ -27,7 +38,7 @@ void WiFiManager::begin() {
 void WiFiManager::begin(char const *apName) {
     _apName = apName;
 
-    EEPROM.begin(512);
+    EEPROM.begin(4096);
     delay(10);
 }
 
@@ -198,10 +209,16 @@ int WiFiManager::serverLoop()
     String s;
     if (req == "/")
     {
-        
+        uint8_t mac[6];
         s = HTTP_200;
         String head = HTTP_HEAD;
-        head.replace("{v}", "Config ESP");
+        head.replace("{v}", "Config Souliss Node");
+        s += "<div>Make sure your home WiFi ON!, You can refresh to scan again.</div>";
+        WiFi.macAddress(mac);
+        String macStr = "here is the mac address of the Node " + macToStr(mac);
+        s += macStr;
+        s += "<div>.</div>";
+        s += "<div>Avalaible SSID.</div>";
         s += head;
         s += HTTP_SCRIPT;
         s += HTTP_STYLE;
@@ -304,4 +321,6 @@ String WiFiManager::urldecode(const char *src)
     
     return decoded;
 }
+
+
 
