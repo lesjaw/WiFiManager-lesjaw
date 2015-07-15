@@ -53,7 +53,7 @@ private:
     const String HTTP_404 = "HTTP/1.1 404 Not Found\r\n\r\n";
     const String HTTP_200 = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n";
     const String HTTP_HEAD = "<!DOCTYPE html><html lang=\"en\"><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><title>{v}</title>";
-    const String HTTP_STYLE = "<style>div,input {margin-bottom: 5px;}body{width:200px;display:block;margin-left:auto;margin-right:auto;}</style>";
+    const String HTTP_STYLE = "<style>div,input {margin-bottom: 5px;}body{width:300px;display:block;margin-left:auto;margin-right:auto;}</style>";
     const String HTTP_SCRIPT = "<script>function c(l){document.getElementById('s').value=l.innerText||l.textContent;document.getElementById('p').focus();}</script>";
     const String HTTP_HEAD_END = "</head><body>";
     const String HTTP_ITEM = "<div><a href='#' onclick='c(this)'>{v}</a></div>";
